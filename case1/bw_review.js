@@ -33,18 +33,23 @@
       within textStr
 
 */
+//Runs the init function when the page loads
 window.onload = init;
 
 function init(){
+   //Looks for everything in the span#stars img query
    var stars = document.querySelectorAll("span#stars img");
    for(var i = 0; i < stars.length; i++){
+      //Changes mouse cursor to a pointer and lights up the stars based on where the cursor is selecting
       stars[i].style.cursor = "pointer";
       stars[i].addEventListener("mouseenter", lightStars);
    }
+   //runs the updateCount function everytime a key is released
    document.getElementById("comment").addEventListener("keyup", updateCount);
 }   
 
 function lightStars(e){
+   //This looks at which star is being selected, and changes the image to a lit star
    var starNumber = e.target.alt;
    var stars = document.querySelectorAll("span#stars img");
    for(var i = 0; i < starNumber; i++){
@@ -53,8 +58,10 @@ function lightStars(e){
    for(var i = starNumber; i < 5; i++){
       stars[i].src = "bw_star.png";
    }
+   //Shows the number of stars selected
    document.getElementById("rating").value = starNumber + " stars";
    e.target.addEventListener("mouseleave", turnOffStars);
+   //Makes it so the stars are set when clicked
    e.target.addEventListener("click", 
       function(e){
          e.target.removeEventListener("mouseleave", turnOffStars);
@@ -63,6 +70,7 @@ function lightStars(e){
 }
 
 function turnOffStars(){
+   //If the stars are not selected at all, it will not display _ stars in the text box
    var stars = document.querySelectorAll("span#stars img");
    for(var i = 0; i < stars.length; i++){
       stars[i].src = "bw_star.png";
@@ -71,6 +79,7 @@ function turnOffStars(){
 }
   
 function updateCount(){
+   //Checks to see if the comment goes over 1000 characters, and prevents the user from posting above 1000 characters
    var commentText = document.getElementById("comment").value;
    var charCount = countCharacters(commentText);
    var wordCountBox = document.getElementById("wordCount")
