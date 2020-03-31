@@ -7,8 +7,8 @@
 
    Crossword Puzzle Script
    
-   Author: 
-   Date:   
+   Author: Marcus Tinney
+   Date: 3/30/2020  
    
    Global Variables
    ================
@@ -48,8 +48,31 @@
 
 
 */
+window.onload = init;
 
+//References all letters in the crossword puzzle
+var allLetters = "";
+//References the letter currently selected in the puzzle
+var currentLetter = "";
+//References the letters used in the currently selected selected across and down clues
+var wordLetters = "";
+//References the across clue currently selected
+var acrossClue = "";
+//References the down clue currently selected
+var downClue = "";
+//Stores the current typing direction (right or down)
+var typeDirection = "right";
 
+function init(){
+   var allLetters = document.querySelectorAll("table#crossword span");
+   var currentLetter = allLetters[1];
+
+   var acrossID = currentLetter.getAttribute("data-clue-a");
+   var downID = currentLetter.getAttribute("data-clue-d");
+
+   var acrossClue = document.getElementById("across").value;
+   var downClue = document.getElementById("down").value;
+}
 
 
 
