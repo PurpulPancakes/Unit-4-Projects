@@ -8,8 +8,8 @@
    Wordsearch Game Script
    
    Filename: kg_search.js
-   Author: 
-   Date:   
+   Author: Marcus Tinney
+   Date: 3/31/2020  
    
    
    Function List
@@ -24,8 +24,29 @@
       on the items in the list array
 
 */
+//Run the init() function when the page loads
+window.onload = init;
 
+function init(){
+   //insert the HTML code for the puzzle
+   document.getElementById("wordTable").innerHTML = drawWordSearch(letterGrid, wordArray);
 
+   drawWordSearch();
+
+   document.addEventListener("mouseup", endBackground);
+   
+   //Add an event listener to the show solution button
+   document.getElementById("showSolution").addEventListener("click",
+      function(){
+         //remove the inline backgroundColor style from each cell
+         if(confirm("Are you sure? That's like cheating dude :/")){
+            for(var i = 0; i < puzzleCells.length; i++){
+               puzzleCells[i].style.backgroundColor = "";
+            }
+         }
+      }
+   )
+}
 
 
 
