@@ -51,29 +51,68 @@
 window.onload = init;
 
 //References all letters in the crossword puzzle
-var allLetters = "";
+var allLetters;
 //References the letter currently selected in the puzzle
-var currentLetter = "";
+var currentLetter;
 //References the letters used in the currently selected selected across and down clues
-var wordLetters = "";
+var wordLetters;
 //References the across clue currently selected
-var acrossClue = "";
+var acrossClue;
 //References the down clue currently selected
-var downClue = "";
+var downClue;
 //Stores the current typing direction (right or down)
 var typeDirection = "right";
 
 function init(){
    var allLetters = document.querySelectorAll("table#crossword span");
-   var currentLetter = allLetters[1];
+   currentLetter = allLetters[0];
 
-   var acrossID = currentLetter.getAttribute("data-clue-a");
-   var downID = currentLetter.getAttribute("data-clue-d");
+   var acrossID = currentLetter.dataset.clueA;
+   var downID = currentLetter.dataset.clueD;
 
-   var acrossClue = document.getElementById("across").value;
-   var downClue = document.getElementById("down").value;
+   var acrossClue = document.getElementById(currentLetter.dataset.clueA);
+   var downClue = document.getElementById(currentLetter.dataset.clueD);
 }
-
+//Step 7
+function formatPuzzle(puzzleLetter){
+   //7a
+   currentLetter = puzzleLetter;
+   //7b
+   for(var i = 0; i < allLetters.length; i++){
+      allLetters[i].style.backgroundColor = "";
+   }
+   //7c
+   acrossClue.style.color = "";
+   downClue.style.color = "";
+   //7d
+   if(currentLetter.dataset.clueA !== undefined){
+      //7d I
+      acrossClue = document.getElementById(currentLetter.dataset.clueA);
+      //7d II
+      acrossClue.style.color = "blue";
+      //7d III
+      wordLetters = document.querySelectorAll("[data-clue-a = " + currentLetter.dataset.clueA + "]");
+      //7d IV
+      for (var i = 0; i < wordLetters.length; i++){
+         wordLetters.style.backgroundColor = "rgb(255, 231, 231)"
+      }
+   }
+   //7e
+   if(currentLetter.dataset.clueD !== undefined){
+      downClue = document.getElementById(currentLetter.dataset.clueD);
+      downClue.style.color = "red";
+      wordLetters = document.querySelectorAll("[data-clue-d = " + currentLetter.dataset.clueD + "]");
+      for (var i = 0; i < wordLetters.length; i++){
+         wordLetters.style.backgroundColor = "rgb(255, 231, 231)"
+      }
+   }
+   //7f
+   if(typeDirection = "right"){
+      currentLetter.style.backgroundColor = "rgb(191, 191, 255)";
+   }else{
+      currentLetter.style.backgroundColor = "rgb(255, 191, 191)";
+   }
+}
 
 
    
