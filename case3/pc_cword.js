@@ -112,10 +112,63 @@ function formatPuzzle(puzzleLetter){
    }else{
       currentLetter.style.backgroundColor = "rgb(255, 191, 191)";
    }
+
+   //Step 8
+   return init;
+
+   //8a
+   formatPuzzle(currentLetter);
+
+   //8b
+   for (var i = 0; i < allLetters.length; i++){
+      //8b I
+      allLetters[i].style.cursor = "pointer";
+      //8b II
+      allLetters[i].onmousedown = function(e) {
+         formatPuzzle(e.target);
+      };
+   }
 }
 
-
-   
+//Step 9
+function selectLetter(e){
+   //9a
+   var leftLetter = document.getElementById(currentLetter.dataset.left);
+   var upLetter = document.getElementById(currentLetter.dataset.up);
+   var rightLetter = document.getElementById(currentLetter.dataset.right);
+   var downLetter = document.getElementById(currentLetter.dataset.down);
+   //9b
+   var userKey = e.keyCode
+   //9c
+      //9c I
+   if(userKey = 37){
+      formatPuzzle(leftLetter);
+      //9c II
+   }else if(userKey = 38){
+      formatPuzzle(upLetter);
+      //9c III
+   }else if(userKey = 39 || 9){
+      formatPuzzle(rightLetter);
+      //9c IV
+   }else if(userKey = 40 || 13){
+      formatPuzzle(downLetter);
+      //9c V
+   }else if(userKey = 8 || 46){
+      currentLetter = "";
+      //9c VI
+   }else if(userKey = 32){
+      switchTypeDirection();
+      //9c VII
+   }else if(userKey >= 65 && userKey <= 90){
+      currentLetter.textContent = getChar(userKey);
+   }else if(typeDirection = "right"){
+      formatPuzzle(rightLetter);
+   }else{
+      formatPuzzle(downLetter);
+   }
+   //9d
+   e.preventDefault();
+}
 
 
 
