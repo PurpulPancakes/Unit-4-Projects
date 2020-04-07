@@ -64,14 +64,16 @@ var downClue;
 var typeDirection = "right";
 
 function init(){
-   var allLetters = document.querySelectorAll("table#crossword span");
+   allLetters = document.querySelectorAll("table#crossword span");
    currentLetter = allLetters[0];
 
    var acrossID = currentLetter.dataset.clueA;
    var downID = currentLetter.dataset.clueD;
 
-   var acrossClue = document.getElementById(currentLetter.dataset.clueA);
-   var downClue = document.getElementById(currentLetter.dataset.clueD);
+   acrossClue = document.getElementById(currentLetter.dataset.clueA);
+   downClue = document.getElementById(currentLetter.dataset.clueD);
+
+   document.onkeydown = selectLetter
 }
 //Step 7
 function formatPuzzle(puzzleLetter){
@@ -168,11 +170,40 @@ function selectLetter(e){
    }
    //9d
    e.preventDefault();
+   //Step 10
+   return init;
 }
 
 
 
+//Step 11
+function switchTypeDirection(){
+   //11a
+   var typeImage = document.getElementById("directionImg");
+   //11b & c
+   if(typeDirection = "right"){
+      typeDirection = "down";
+      typeImage.src = "pc_right.png";
+      currentLetter.style.backgroundColor = "rgb(255, 191, 191)";
+   }else{
+      typeDirection = "right";
+      typeImage.src = "pc_down.png";
+      currentLetter.style.backgroundColor = "rgb(191, 191, 255)";
+   }
 
+   //Step 12
+   return init;
+}
+//12a
+var typeImage = document.getElementById("directionImg");
+//12b
+typeImage.style.cursor = "pointer";
+//12c
+document.getElementById("showSolution").onclick = function() {
+   for (var i = 0; i < allLetters.length; i++) {
+      allLetters[i].textContent = allLetters[i].dataset.letter;
+   }
+};
 
 /*====================================================*/
 
